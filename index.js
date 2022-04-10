@@ -5,6 +5,7 @@ const cors = require("cors");
 
 let persons = require("./contacts");
 app.use(cors());
+app.use(express.static("build"));
 app.use(express.json());
 morgan.token("body", (req) => JSON.stringify(req.body));
 app.use(

@@ -25,13 +25,13 @@ const person = new Person({
 });
 
 if (name) {
-  person.save().then((response) => {
+  person.save().then(() => {
     console.log(`added ${name} number ${number} to phonebook`);
     mongoose.connection.close();
   });
 } else {
   Person.find({}).then((result) => {
-    console.log(`Phonebook:`);
+    console.log("Phonebook::");
     result.forEach((person) => {
       console.log(`${person.name} ${person.number}`);
     });

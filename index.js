@@ -13,7 +13,7 @@ app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms :body")
 );
 
-app.get("/api/persons", (req, res, next) => {
+app.get("/api/persons", (_req, res, next) => {
   Persons.find({})
     .then((result) => {
       res.json(result);
@@ -23,7 +23,7 @@ app.get("/api/persons", (req, res, next) => {
     });
 });
 
-app.get("/info", (req, res) => {
+app.get("/info", (_req, res) => {
   const date = new Date();
   let count = 0;
   Persons.find({}).then((result) => {
@@ -53,7 +53,7 @@ app.get("/api/persons/:id", (req, res, next) => {
 app.delete("/api/persons/:id", (req, res, next) => {
   const id = req.params.id;
   Persons.findByIdAndDelete(id)
-    .then((result) => {
+    .then(() => {
       res.status(204).end();
     })
     .catch((error) => {
@@ -101,7 +101,7 @@ app.put("/api/persons/:id", (req, res, next) => {
     });
 });
 
-const errorHandler = (error, request, response, next) => {
+const errorHandler = (error, _request, response, next) => {
   if (error.name === "ValidationError") {
     return response.status(400).json({
       message: error.message,
